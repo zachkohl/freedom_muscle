@@ -645,4 +645,4 @@ app.get('/', function (req, res) {
 // //   .done();
 // // };//end TextMessage
 // //textMessage();
-// app.listen(PORT, () => console.log('Example app listening on port 3000!')) //This listens to the port for incoming traffic, just runs the http.Server.listen(), the regular nodeJS server. See https://expressjs.com/en/api.html#app.listen
+app.listen(PORT, () => console.log('Example app listening on port 3000!')) //This listens to the port for incoming traffic, just runs the http.Server.listen(), the regular nodeJS server. See https://expressjs.com/en/api.html#app.listen
