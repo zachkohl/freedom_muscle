@@ -1,0 +1,30 @@
+//-Start page for stargarnet.io
+
+//- How to do comments in pug: https://pugjs.org/language/comments.html
+
+//- PUG EXPLANATION
+//- Indentation in pug matters, what is on the line matters. You can't mix comments and content.
+//- you put the HTML tag keyword, then a space, then the content that would normally go inside the tag.
+//- To make something dynamic, you use the = sign. These variables are passed in back in the main app file. 
+
+//- Here is an example of what would go on the main app file
+
+//- app.get('/', function (req, res) {
+//-   res.render('index', { title: 'Hey', message: 'Hello there!' })
+//- })
+
+//- And the pug content would would like:
+//- html 
+//-   head
+//-     title= title
+//-   body
+//-     h1= message
+
+
+//- You can do a lot more, basically anything you could do with Jinga you can do with pug
+
+html
+  head
+    title= title
+  body
+    h1= message

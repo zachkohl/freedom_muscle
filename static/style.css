@@ -1,0 +1,12 @@
+a.test {
+    font-weight: bold;
+}
+body {
+    background-color:#c3c3c7;
+    min-width: 800px;
+    min-height: 400px;
+}
+
+.delete {
+    color: red;
+}

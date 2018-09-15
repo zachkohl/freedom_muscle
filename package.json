@@ -1,0 +1,36 @@
+{
+  "name": "stargarnetmain",
+  "version": "1.0.0",
+  "description": "stargarnet.io page",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nf start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachkohl/stargarnet.git"
+  },
+  "author": "Zach Kohl",
+  "bugs": {
+    "url": "https://github.com/zachkohl/stargarnet/issues"
+  },
+  "homepage": "https://github.com/zachkohl/stargarnet#readme",
+  "dependencies": {
+    "alarm": "^2.0.0",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "connect-pg-simple": "^5.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "pg": "^7.4.3",
+    "phone": "^2.1.0",
+    "pug": "^2.0.3",
+    "twilio": "^3.19.2"
+  },
+  "engines": {
+    "node": "8.9.1"
+  }
+}

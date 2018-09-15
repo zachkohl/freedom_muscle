@@ -1,0 +1,3 @@
+Command window must be pointed to root folder of project. Use node instead of nodemon. 
+
+browser-sync start --proxy localhost: --files="**/*"

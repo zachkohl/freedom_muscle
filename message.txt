@@ -1,0 +1,12 @@
+ Friendly Name
+
+API_key
+Sid
+
+SK6d67b3fa5f184be55845f8392fd75ce2
+Key Type
+
+Standard
+Secret
+
+cuYG8i6L4avEwuwOgdCBA9kdjZPbgzR7
