@@ -27,9 +27,7 @@ const PORT = process.env.PORT || 80; //This is the port variable, it accesses a 
 
 const app = express(); //Enstantiate an express object
 
-app.get('/', function (req, res) {
-  res.send('hello world');
-});
+
 const bodyParser = require('body-parser'); //This is needed for reading the body of post request. 
 
 var bcrypt = require('bcrypt');
