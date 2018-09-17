@@ -27,7 +27,9 @@ const PORT = process.env.PORT || 80; //This is the port variable, it accesses a 
 
 const app = express(); //Enstantiate an express object
 
-
+// app.get('/', function (req, res) {
+//   res.send('hello world');
+// });
 const bodyParser = require('body-parser'); //This is needed for reading the body of post request. 
 
 var bcrypt = require('bcrypt');
@@ -48,26 +50,41 @@ app.use(bodyParser.json()); //This also configures the body parser https://stack
 const session = require('express-session');
 //DATABASE CONFIG
 
-      const { Pool, Client } = require('pg')
+// //LOCAL DATABASE CONFIGURATION
+  //     const { Pool, Client } = require('pg')
   
-  const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'stargarnet',
-    password: 'password',
-    port: 5432,
-  })
+  // const pool = new Pool({
+  //   user: 'postgres',
+  //   host: 'localhost',
+  //   database: 'stargarnet',
+  //   password: 'password',
+  //   port: 5432,
+  // })
+
+  // const client = new Client({
+  //   user: 'postgres',
+  //   host: 'localhost',
+  //   database: 'stargarnet',
+  //   password: 'password',
+  //   port: 5432,
+  // })
+  // client.connect()
+  ////END LOCAL DATABASE CONFIGURATION
+  
+  const { Pool, Client } = require('pg')
 
   const client = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'stargarnet',
-    password: 'password',
-    port: 5432,
-  })
-  client.connect()
-  // client.query('SELECT NOW()', (err, res) => {
-  //   console.log(err, res)
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  
+
+  client.connect();
    
 
   pgSession = require('connect-pg-simple')(session); //This all ends up encrypted on the client side. Used wireshark to check. 
