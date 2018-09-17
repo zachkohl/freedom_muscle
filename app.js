@@ -85,7 +85,47 @@ const session = require('express-session');
   
 
   client.connect();
-   
+  
+  client.query('\
+  CREATE TABLE users (\
+    id serial PRIMARY KEY,\
+    username VARCHAR (255) UNIQUE NOT NULL,\
+    email VARCHAR(255) NOT NULL,\
+    phone VARCHAR(255) NOT NULL,\
+    storedhash VARCHAR(255) NOT NULL,\
+    reviewtime TIME,\
+    lastupdate TIMESTAMPTZ,\
+    RoughAlarm TIMESTAMPTZ,\
+    remindercount int\
+   );\
+   \
+   SET timezone = "America/Los_Angeles";\
+   \
+   \
+   \
+   --USED FOR SESSION MANAGEMENT: https://github.com/voxpelli/node-connect-pg-simple/blob/HEAD/table.sql\
+   CREATE TABLE "session" (\
+     "sid" varchar NOT NULL COLLATE "default",\
+     "sess" json NOT NULL,\
+     "expire" timestamp(6) NOT NULL\
+   )\
+   WITH (OIDS=FALSE);\
+   ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;\
+  \
+  \
+  CREATE TABLE goals (\
+    id serial PRIMARY KEY,\
+    title VARCHAR (255) UNIQUE NOT NULL,\
+    username VARCHAR(255) NOT NULL,\
+    content TEXT,\
+    lastupdate TIMESTAMPTZ,\
+    lastreminder TIMESTAMPTZ,\
+    remindercount int\
+   );\
+   ', (err, res) => {
+    if (err) throw err;
+    client.end();
+  });
 
   pgSession = require('connect-pg-simple')(session); //This all ends up encrypted on the client side. Used wireshark to check. 
 
