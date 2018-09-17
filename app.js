@@ -135,7 +135,8 @@ const session = require('express-session');
     content TEXT,\
     lastupdate TIMESTAMPTZ,\
     lastreminder TIMESTAMPTZ,\
-    remindercount int', (err, res) => {
+    remindercount int\
+    );', (err, res) => {
     if (err) throw err;
     client.end();
   });
