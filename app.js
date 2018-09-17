@@ -22,7 +22,6 @@ const express = require('express'); //This inports the express.js file from the 
 //require() function are in node_modules unless otherwise specified. 
 
 const path = require('path') ;//Heroku needs this to run
-const PORT = process.env.PORT || 80; //This is the port variable, it accesses a process that is on Heroku, OR it is equal to 80. Set to 3000 instead of 80 if you don't want exposed to local network. 
 //To get local network functionality, you just have to use port 80 and set nodejs as a program that is allowed through windows firewall. 
 
 const app = express(); //Enstantiate an express object
@@ -86,46 +85,46 @@ const session = require('express-session');
 
   client.connect();
   
-  client.query('\
-  CREATE TABLE users (\
-    id serial PRIMARY KEY,\
-    username VARCHAR (255) UNIQUE NOT NULL,\
-    email VARCHAR(255) NOT NULL,\
-    phone VARCHAR(255) NOT NULL,\
-    storedhash VARCHAR(255) NOT NULL,\
-    reviewtime TIME,\
-    lastupdate TIMESTAMPTZ,\
-    RoughAlarm TIMESTAMPTZ,\
-    remindercount int\
-   );\
-   \
-   SET timezone = "America/Los_Angeles";\
-   \
-   \
-   \
-   --USED FOR SESSION MANAGEMENT: https://github.com/voxpelli/node-connect-pg-simple/blob/HEAD/table.sql\
-   CREATE TABLE "session" (\
-     "sid" varchar NOT NULL COLLATE "default",\
-     "sess" json NOT NULL,\
-     "expire" timestamp(6) NOT NULL\
-   )\
-   WITH (OIDS=FALSE);\
-   ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;\
-  \
-  \
-  CREATE TABLE goals (\
-    id serial PRIMARY KEY,\
-    title VARCHAR (255) UNIQUE NOT NULL,\
-    username VARCHAR(255) NOT NULL,\
-    content TEXT,\
-    lastupdate TIMESTAMPTZ,\
-    lastreminder TIMESTAMPTZ,\
-    remindercount int\
-   );\
-   ', (err, res) => {
-    if (err) throw err;
-    client.end();
-  });
+  // client.query('\
+  // CREATE TABLE users (\
+  //   id serial PRIMARY KEY,\
+  //   username VARCHAR (255) UNIQUE NOT NULL,\
+  //   email VARCHAR(255) NOT NULL,\
+  //   phone VARCHAR(255) NOT NULL,\
+  //   storedhash VARCHAR(255) NOT NULL,\
+  //   reviewtime TIME,\
+  //   lastupdate TIMESTAMPTZ,\
+  //   RoughAlarm TIMESTAMPTZ,\
+  //   remindercount int\
+  //  );\
+  //  \
+  //  SET timezone = "America/Los_Angeles";\
+  //  \
+  //  \
+  //  \
+  //  --USED FOR SESSION MANAGEMENT: https://github.com/voxpelli/node-connect-pg-simple/blob/HEAD/table.sql\
+  //  CREATE TABLE "session" (\
+  //    "sid" varchar NOT NULL COLLATE "default",\
+  //    "sess" json NOT NULL,\
+  //    "expire" timestamp(6) NOT NULL\
+  //  )\
+  //  WITH (OIDS=FALSE);\
+  //  ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;\
+  // \
+  // \
+  // CREATE TABLE goals (\
+  //   id serial PRIMARY KEY,\
+  //   title VARCHAR (255) UNIQUE NOT NULL,\
+  //   username VARCHAR(255) NOT NULL,\
+  //   content TEXT,\
+  //   lastupdate TIMESTAMPTZ,\
+  //   lastreminder TIMESTAMPTZ,\
+  //   remindercount int\
+  //  );\
+  //  ', (err, res) => {
+  //   if (err) throw err;
+  //   client.end();
+  // });
 
   pgSession = require('connect-pg-simple')(session); //This all ends up encrypted on the client side. Used wireshark to check. 
 
@@ -595,10 +594,10 @@ app.post('/updatetime',checkSession,function(req, res){
 
 
 
-alarm.recurring((1000*5), function() {
-  console.log('Hello, world!');
-  checkReview();
-});
+// alarm.recurring((1000*5), function() {
+//   console.log('Hello, world!');
+//   checkReview();
+// });
 
 function checkReview(){
   let text = 'SELECT * FROM users'
