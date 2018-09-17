@@ -127,6 +127,18 @@ const session = require('express-session');
   //   client.end();
   // });
 
+  client.query('\
+   CREATE TABLE "session" (\
+     "sid" varchar NOT NULL COLLATE "default",\
+     "sess" json NOT NULL,\
+     "expire" timestamp(6) NOT NULL\
+   )\
+   WITH (OIDS=FALSE);\
+   ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;', (err, res) => {
+    if (err) throw err;
+    client.end();
+  });
+
   pgSession = require('connect-pg-simple')(session); //This all ends up encrypted on the client side. Used wireshark to check. 
 
 var sess = {
