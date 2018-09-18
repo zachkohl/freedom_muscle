@@ -23,12 +23,19 @@ const express = require('express'); //This inports the express.js file from the 
 const helmet = require('helmet')
 
 const path = require('path') ;//Heroku needs this to run
-const PORT = process.env.PORT || 8080; //This is the port variable, it accesses a process that is on Heroku, OR it is equal to 80. Set to 3000 instead of 80 if you don't want exposed to local network. 
+const PORT = process.env.PORT || 80; //This is the port variable, it accesses a process that is on Heroku, OR it is equal to 80. Set to 3000 instead of 80 if you don't want exposed to local network. 
 //To get local network functionality, you just have to use port 80 and set nodejs as a program that is allowed through windows firewall. 
 
 const app = express(); //Enstantiate an express object
 app.use(helmet())
 
+function forceHTTPS(req, res, next) {
+  if (!req.secure){
+    return res.redirect('https://' + req.get('host') + req.url);
+  }
+  next();
+}
+app.use(ForceHTTPS);
 // app.get('/', function (req, res) {
 //   res.send('hello world');
 // });
