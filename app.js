@@ -20,12 +20,14 @@ const defaultTime = '07:00'
 
 const express = require('express'); //This inports the express.js file from the node_modules. Node appears to assume things in the
 //require() function are in node_modules unless otherwise specified. 
+const helmet = require('helmet')
 
 const path = require('path') ;//Heroku needs this to run
-const PORT = process.env.PORT || 80; //This is the port variable, it accesses a process that is on Heroku, OR it is equal to 80. Set to 3000 instead of 80 if you don't want exposed to local network. 
+const PORT = process.env.PORT || 8080; //This is the port variable, it accesses a process that is on Heroku, OR it is equal to 80. Set to 3000 instead of 80 if you don't want exposed to local network. 
 //To get local network functionality, you just have to use port 80 and set nodejs as a program that is allowed through windows firewall. 
 
 const app = express(); //Enstantiate an express object
+app.use(helmet())
 
 // app.get('/', function (req, res) {
 //   res.send('hello world');
@@ -127,19 +129,19 @@ const session = require('express-session');
   //   client.end();
   // });
 
-  client.query('\
-  CREATE TABLE goals (\
-    id serial PRIMARY KEY,\
-    title VARCHAR (255) UNIQUE NOT NULL,\
-    username VARCHAR(255) NOT NULL,\
-    content TEXT,\
-    lastupdate TIMESTAMPTZ,\
-    lastreminder TIMESTAMPTZ,\
-    remindercount int\
-    );', (err, res) => {
-    if (err) throw err;
-    client.end();
-  });
+  // client.query('\
+  // CREATE TABLE goals (\
+  //   id serial PRIMARY KEY,\
+  //   title VARCHAR (255) UNIQUE NOT NULL,\
+  //   username VARCHAR(255) NOT NULL,\
+  //   content TEXT,\
+  //   lastupdate TIMESTAMPTZ,\
+  //   lastreminder TIMESTAMPTZ,\
+  //   remindercount int\
+  //   );', (err, res) => {
+  //   if (err) throw err;
+  //   client.end();
+  // });
 
   pgSession = require('connect-pg-simple')(session); //This all ends up encrypted on the client side. Used wireshark to check. 
 
