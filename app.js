@@ -35,7 +35,7 @@ function forceHTTPS(req, res, next) {
   }
   next();
 }
-app.use(ForceHTTPS);
+app.use(forceHTTPS);
 // app.get('/', function (req, res) {
 //   res.send('hello world');
 // });
