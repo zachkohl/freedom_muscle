@@ -60,40 +60,40 @@ const session = require('express-session');
 //DATABASE CONFIG
 
 // //LOCAL DATABASE CONFIGURATION
-      const { Pool, Client } = require('pg')
-  
-  const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'stargarnet',
-    password: 'password',
-    port: 5432,
-  })
-
-  const client = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'stargarnet',
-    password: 'password',
-    port: 5432,
-  })
-  client.connect()
-  ////END LOCAL DATABASE CONFIGURATION
-  
-  // const { Pool, Client } = require('pg')
-
-  // const client = new Client({
-  //   connectionString: process.env.DATABASE_URL,
-  //   ssl: true,
-  // });
+  //     const { Pool, Client } = require('pg')
   
   // const pool = new Pool({
-  //   connectionString: process.env.DATABASE_URL,
-  //   ssl: true,
-  // });
+  //   user: 'postgres',
+  //   host: 'localhost',
+  //   database: 'stargarnet',
+  //   password: 'password',
+  //   port: 5432,
+  // })
+
+  // const client = new Client({
+  //   user: 'postgres',
+  //   host: 'localhost',
+  //   database: 'stargarnet',
+  //   password: 'password',
+  //   port: 5432,
+  // })
+  // client.connect()
+  ////END LOCAL DATABASE CONFIGURATION
+  
+  const { Pool, Client } = require('pg')
+
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+  
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
   
 
-  // client.connect();
+  client.connect();
   
   // client.query('\
   // CREATE TABLE users (\
