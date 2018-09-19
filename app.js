@@ -613,7 +613,10 @@ app.post('/updatetime',checkSession,function(req, res){
       //roughalarm = new Date(roughalarm.getTime()); //developer mode
       roughalarm = new Date(roughalarm.getTime() + 1000*60*60*24 + roughalarm.getTimezoneOffset()*60*1000); //increment one day
       let text = 'UPDATE users SET lastupdate = $1,roughalarm = $2, remindercount = $3 WHERE (username = $4)'
-      let values = [req.body.timestamp,roughalarm,0,req.session.user]
+      let lastupdate = new Date(req.body.timestamp)
+    lastupdate = new Date(lastupdate + lastupdate.getTimezoneOffset()*60*1000).toDateString()
+    console.log(reviewTime)
+      let values = [lastupdate,roughalarm,0,req.session.user]
       console.log(req.body.timestamp)
       query(text,values,callback);
       function callback() {
