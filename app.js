@@ -427,7 +427,7 @@ pool.query(text, values, (err, res) => {
         req.session.user = req.body.username; 
         console.log('login success');
         title = 'login success';
-        response.redirect('/start');
+        response.redirect('/');
         //response.render('login');
         }
         else{
