@@ -467,7 +467,7 @@ app.get('/logout', checkSession, function(req, res, next) {
   res.render('start', { title: 'user is logged out' })
 });
 
-const placeholder = '/';
+
 
 function query(text, values,callback,) {
   //Query
