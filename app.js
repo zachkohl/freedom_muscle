@@ -554,7 +554,10 @@ app.post('/postajax',checkSession,function(req, res){
 
   function updateGoal(){
     let text = 'UPDATE goals SET LASTUPDATE = $1, CONTENT = $2 WHERE (username = $3 AND title = $4)' 
-    let values = [req.body.timestamp,req.body.content,req.session.user,req.body.title]
+    let lastupdate = new Date(req.body.timestamp)
+    lastupdate = new Date(lastupdate + lastupdate.getTimezoneOffset()*60*1000).toDateString()
+    console.log(reviewTime)
+    let values = [lastupdate,req.body.content,req.session.user,req.body.title]
     console.log(req.body.timestamp)
     query(text,values,callback);
     function callback() {
@@ -586,10 +589,8 @@ app.post('/deletegoal',checkSession,function(req, res){
 
 app.post('/ajaxreviewtime',checkSession,function(req, res){
   let text = 'UPDATE users SET reviewtime = $1 WHERE (username = $2)'
-  let reviewTime = new Date(req.body.reviewTime)
-  reviewTime = new Date(reviewTime - 7*60*1000).toDateString()
-  console.log(reviewTime)
-  let values = [reviewTime,req.session.user]
+
+  let values = [req.body.reviewTime,req.session.user]
   console.log(req.body.reviewTime)
   query(text,values,callback);
   function callback(data) {
