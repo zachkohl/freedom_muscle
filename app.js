@@ -60,40 +60,40 @@ const session = require('express-session');
 //DATABASE CONFIG
 
 // //LOCAL DATABASE CONFIGURATION
-  //     const { Pool, Client } = require('pg')
-  
-  // const pool = new Pool({
-  //   user: 'postgres',
-  //   host: 'localhost',
-  //   database: 'stargarnet',
-  //   password: 'password',
-  //   port: 5432,
-  // })
-
-  // const client = new Client({
-  //   user: 'postgres',
-  //   host: 'localhost',
-  //   database: 'stargarnet',
-  //   password: 'password',
-  //   port: 5432,
-  // })
-  // client.connect()
-  ////END LOCAL DATABASE CONFIGURATION
-  
-  const { Pool, Client } = require('pg')
-
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
+      const { Pool, Client } = require('pg')
   
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
+    user: 'postgres',
+    host: 'localhost',
+    database: 'stargarnet',
+    password: 'password',
+    port: 5432,
+  })
+
+  const client = new Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'stargarnet',
+    password: 'password',
+    port: 5432,
+  })
+  client.connect()
+  ////END LOCAL DATABASE CONFIGURATION
+  
+  // const { Pool, Client } = require('pg')
+
+  // const client = new Client({
+  //   connectionString: process.env.DATABASE_URL,
+  //   ssl: true,
+  // });
+  
+  // const pool = new Pool({
+  //   connectionString: process.env.DATABASE_URL,
+  //   ssl: true,
+  // });
   
 
-  client.connect();
+  // client.connect();
   
   // client.query('\
   // CREATE TABLE users (\
@@ -377,7 +377,7 @@ app.post('/register', function(req, res) {
       } else {
         console.log(res.rows[0])
         req.session.user = req.body.username; //NewUser is the username provided by the form.
-        response.render('register');
+        response.render('/');
       }
     })//end query
 
@@ -490,7 +490,7 @@ function query(text, values,callback,) {
 };
 
 
-app.get(placeholder,checkSession,data=[], function(req, res) {  
+app.get('/',checkSession,data=[], function(req, res) {  
   let text = 'SELECT * FROM goals WHERE username = $1' // everything after RETURNING are the columns that you want in what gets returned, use a * for everything. 
   let values = [req.session.user]
   query(text,values,callback);
@@ -502,7 +502,7 @@ app.get(placeholder,checkSession,data=[], function(req, res) {
   
 });
 
-app.post(placeholder,checkSession, function(req, res) {
+app.post('/',checkSession, function(req, res) {
 //Start query
 let text = 'INSERT INTO goals(title,username,content) VALUES($1,$2,$3)' 
 let values = [req.body.title,req.session.user,req.body.content]
