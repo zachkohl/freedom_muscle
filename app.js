@@ -586,7 +586,9 @@ app.post('/deletegoal',checkSession,function(req, res){
 
 app.post('/ajaxreviewtime',checkSession,function(req, res){
   let text = 'UPDATE users SET reviewtime = $1 WHERE (username = $2)'
-  let values = [req.body.reviewTime,req.session.user]
+  let reviewTime = new Date(req.body.reviewTime).toDateString()
+  console.log(reviewTime)
+  let values = [reviewTime,req.session.user]
   console.log(req.body.reviewTime)
   query(text,values,callback);
   function callback(data) {
