@@ -607,7 +607,7 @@ app.post('/updatetime',checkSession,function(req, res){
       let roughalarm = new Date().toDateString()  + ' '+ reviewtime; //When the review is due by today
       roughalarm = new Date(roughalarm)
       //roughalarm = new Date(roughalarm.getTime()); //developer mode
-      roughalarm = new Date(roughalarm.getTime() + 1000*60*60*24); //increment one day
+      roughalarm = new Date(roughalarm.getTime() + 1000*60*60*24 + roughalarm.getTimezoneOffset()*60*1000); //increment one day
       let text = 'UPDATE users SET lastupdate = $1,roughalarm = $2, remindercount = $3 WHERE (username = $4)'
       let values = [req.body.timestamp,roughalarm,0,req.session.user]
       console.log(req.body.timestamp)
@@ -664,30 +664,30 @@ function checkReview(){
     currentAlarm = userStuff.roughalarm;
     newAlarm = new Date();
     if (currentReminderCount== 0){
-      newAlarm = new Date(currentAlarm.getTime() + 1000*15);
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*15);
       console.log(newAlarm)
 textMessage(userStuff.phone,'You need to review your goals');
     } else if ( currentReminderCount== 1){
-      newAlarm = new Date(currentAlarm.getTime() + 1000*60*60*2)
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*60*2)
       console.log('1: ' + newAlarm)
 textMessage(userStuff.phone,'Goals are important, you committed to this');
     }else if ( currentReminderCount== 2){
-      newAlarm = new Date(currentAlarm.getTime() + 1000*60*60)
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*60)
       console.log('2: ' + newAlarm)
 textMessage(userStuff.phone,'It won\'t take very long, please review your goals.');
 
     }else if ( currentReminderCount== 3){
-      newAlarm = new Date(currentAlarm.getTime() + 1000*60*30)
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*30)
       console.log('3: ' + newAlarm)
 textMessage(userStuff.phone,'There is no way you don\'t have internet access, review your goals...');
     }else if ( currentReminderCount== 4){
-      newAlarm = new Date(currentAlarm.getTime() + 1000*60*15)
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*15)
       console.log('4: ' + newAlarm)
 textMessage(userStuff.phone,'Just do it, review goals now');
 textMessage('+12087551332','username: '+ userStuff.username + ' has maxed out their goal reminders');
     }else{
       console.log('5: ' + newAlarm)
-      newAlarm = new Date(currentAlarm.getTime() + 1000*60*1)
+      newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*1)
 // textMessage('+12087551332','username: '+ userStuff.username + ' has maxed out their goal reminders');
     }
     currentReminderCount++;
