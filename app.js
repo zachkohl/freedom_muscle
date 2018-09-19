@@ -60,40 +60,44 @@ const session = require('express-session');
 //DATABASE CONFIG
 
 // //LOCAL DATABASE CONFIGURATION
-  //     const { Pool, Client } = require('pg')
+if (app.get('env') === 'development') {
+      const { Pool, Client } = require('pg')
   
-  // const pool = new Pool({
-  //   user: 'postgres',
-  //   host: 'localhost',
-  //   database: 'stargarnet',
-  //   password: 'password',
-  //   port: 5432,
-  // })
+  var pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'stargarnet',
+    password: 'password',
+    port: 5432,
+  })
 
-  // const client = new Client({
-  //   user: 'postgres',
-  //   host: 'localhost',
-  //   database: 'stargarnet',
-  //   password: 'password',
-  //   port: 5432,
-  // })
-  // client.connect()
+  var client = new Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'stargarnet',
+    password: 'password',
+    port: 5432,
+  })
+  client.connect()
   ////END LOCAL DATABASE CONFIGURATION
+}
+else{
   
-  const { Pool, Client } = require('pg')
+  var { Pool, Client } = require('pg')
 
-  const client = new Client({
+  var client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
   
-  const pool = new Pool({
+  var pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: true,
   });
   
 
   client.connect();
+}
   
   // client.query('\
   // CREATE TABLE users (\
@@ -377,7 +381,7 @@ app.post('/register', function(req, res) {
       } else {
         console.log(res.rows[0])
         req.session.user = req.body.username; //NewUser is the username provided by the form.
-        response.render('/');
+        response.redirect('/');
       }
     })//end query
 
