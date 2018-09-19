@@ -154,7 +154,8 @@ else{
 
 $( '#master' ).on("click",".submission",function(){  //must use .on() if you want to update updates. 
     let package = $(this).parents('form').serializeArray();
-    let timestamp = new Date(Date.getTime() + Date.getTimezoneOffset()*60*1000);
+    let timestamp = new Date();
+    timestamp = new Date(timestamp.getTime() + timestamp.getTimezoneOffset()*60*1000)
     console.log(timestamp.toJSON());
     console.log(timestamp)
     package.push({name:'timestamp', value:timestamp}); 
