@@ -83,21 +83,21 @@ $( '#master' ).on("click",".deleteGoalclass",function(){  //must use .on() if yo
     // package.push({name:'goal', value:'ID'}); 
     // x = package[2].value; 
    // console.log(String(x));
-     $.ajax({
-         url:"/deletegoal",
-         data: package,
-         type: 'POST',
-         contentType :  "application/x-www-form-urlencoded; charset=UTF-8",
-     }).done(function(){
-         console.log('flag3')
-         deleteGoal(thisID);
-     })//end done
-     .fail(function( xhr, status, errorThrown ) {
-     //  alert( "Sorry, there was a problem!" );
-      console.log( "Error: " + errorThrown );
-      console.log( "Status: " + status );
-      //console.dir( xhr );
-    })
+   $.ajax({
+    url:"/deletegoal",
+    data: package,
+    type: 'POST',
+    contentType :  "application/x-www-form-urlencoded; charset=UTF-8",
+}).done(function(){
+    console.log('flag3')
+    deleteGoal(thisID);
+})//end done
+.fail(function( xhr, status, errorThrown ) {
+//  alert( "Sorry, there was a problem!" );
+ console.log( "Error: " + errorThrown );
+ console.log( "Status: " + status );
+ //console.dir( xhr );
+})
     // Code to run regardless of success or failure;
  //    .always(function( xhr, status ) {
  //      alert( "The request is complete!" );
