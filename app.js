@@ -670,24 +670,24 @@ function checkReview(){
     if (currentReminderCount== 0){
       newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*15);
       console.log(newAlarm)
-textMessage(userStuff.phone,'You need to review your goals');
+textMessage(userStuff.phone,'You need to review your goals https://www.freedommuscle.com');
     } else if ( currentReminderCount== 1){
       newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*60*2)
       console.log('1: ' + newAlarm)
-textMessage(userStuff.phone,'Goals are important, you committed to this');
+textMessage(userStuff.phone,'Goals are important, you committed to this https://www.freedommuscle.com/');
     }else if ( currentReminderCount== 2){
       newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*60)
       console.log('2: ' + newAlarm)
-textMessage(userStuff.phone,'It won\'t take very long, please review your goals.');
+textMessage(userStuff.phone,'It won\'t take very long, please review your goals. https://www.freedommuscle.com');
 
     }else if ( currentReminderCount== 3){
       newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*30)
       console.log('3: ' + newAlarm)
-textMessage(userStuff.phone,'There is no way you don\'t have internet access, review your goals...');
+textMessage(userStuff.phone,'There is no way you don\'t have internet access, review your goals... https://www.freedommuscle.com');
     }else if ( currentReminderCount== 4){
       newAlarm = new Date(currentAlarm.getTime()+ currentAlarm.getTimezoneOffset()*60*1000 + 1000*60*15)
       console.log('4: ' + newAlarm)
-textMessage(userStuff.phone,'Just do it, review goals now');
+textMessage(userStuff.phone,'Just do it, review goals now https://www.freedommuscle.com');
 textMessage('+12087551332','username: '+ userStuff.username + ' has maxed out their goal reminders');
     }else{
       console.log('5: ' + newAlarm)
