@@ -162,7 +162,7 @@ var sess = {
      // Use another table-name than the default "session" one
   }),
   secret: 'keyboard cat',
-  cookie: {maxAge:2629746000},
+  cookie: {},
   resave: false,
   saveUninitialized: true
 }
