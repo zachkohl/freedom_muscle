@@ -8,8 +8,8 @@ const fs = require('fs'); //because we want to write static files.
 
 const alarm = require('alarm');
 
-const accountSid = 'ACa57c27c2ba8ccc15c75bfb712f5d9949';
-const authToken = '0c97512ae9be7b5697eb6cc99b1e5406';
+const accountSid = process.env.accountSid;
+const authToken =  process.env.authToken;
 const clientTwilio = require('twilio')(accountSid, authToken);
 
 const phone = require('phone')
